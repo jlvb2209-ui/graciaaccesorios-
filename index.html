@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracia Accesorios | Catálogo Exclusivo</title>
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="w hero-content">
+            <!-- Logo ubicado en la esquina izquierda -->
+            <img src="LOGO.PNG" alt="Gracia Accesorios Logo" class="brand-logo-img">
+            <div class="brand-text">
+                <h1>Gracia Accesorios</h1>
+                <p>Realza tu esencia con gracia✨</p>
+            </div>
+        </div>
+    </header>
+    <main class="w catalog-layout">
+        <aside>
+            <nav class="categories-container" id="categoryFilter">
+                <button class="cat-btn active" data-category="todos">Ver Todo</button>
+            </nav>
+        </aside>
+        <section class="product-grid" id="productGrid">
+            <!-- Se carga dinámicamente desde Firebase -->
+        </section>
+    </main>
+
+    <!-- Modal para ampliar imagen -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <img class="modal-content" id="imgModalExpanded">
+    </div>
+
+    <footer>
+        <div class="w">
+            <p>&copy; 2026 Joyería Exclusiva. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script type="module" src="script-cliente.js"></script>
+</body>
+</html>
