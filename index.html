@@ -39,7 +39,7 @@
         }
 
         /* =========================================================
-           1. TEMA NAVIDAD (Línea rosada, botones y categorías actualizadas)
+           1. TEMA NAVIDAD (Fondo con copitos, precios, nombres y modal en tono rosado)
            ========================================================= */
         body.theme-navidad {
             background-color: #fdf2f4 !important;
@@ -50,7 +50,7 @@
         }
         body.theme-navidad .hero {
             background: #000000 !important;
-            border-bottom: 4px solid #e11d48 !important; /* Línea inferior del header en tono rosado solicitado */
+            border-bottom: 4px solid #e11d48 !important;
             color: #ffffff !important;
         }
         body.theme-navidad .brand-text h1,
@@ -60,11 +60,11 @@
         body.theme-navidad .cat-btn {
             background: #ffffff !important;
             color: #e11d48 !important;
-            border: 1px solid #fbcfe8 !important;
+            border: 1px solid #fecdd3 !important;
         }
         body.theme-navidad .cat-btn.active,
         body.theme-navidad .cat-btn:hover {
-            background: #e11d48 !important; /* Botón activo con el tono rosado exacto */
+            background: #e11d48 !important;
             color: #ffffff !important;
             border-color: #e11d48 !important;
         }
@@ -77,16 +77,19 @@
             color: #db2777 !important;
             font-weight: 700 !important;
         }
+        /* Nombre de los productos con tono rosado acorde */
         body.theme-navidad .product-title {
             color: #9f1239 !important;
             font-weight: 700 !important;
         }
+        /* Caja de precios con fondo en tono rosado */
         body.theme-navidad .product-price-box {
             background: #fce7f3 !important;
             color: #be123c !important;
             border: 1px solid #f43f5e !important;
             font-weight: 700 !important;
         }
+        /* Fondo al presionar/ampliar la imagen (Modal) con el tono rosado */
         body.theme-navidad .modal {
             background-color: rgba(253, 242, 244, 0.95) !important;
         }
@@ -158,7 +161,7 @@
         body.theme-san-valentin {
             background-color: #fff5f7 !important;
             color: #4c0519 !important;
-            background-image: url('IMG_7085.JPG.jpeg');[cite: 6]
+            background-image: url('IMG_7085.JPG.jpeg');
             background-repeat: repeat;
             background-size: 160px;
         }
@@ -304,8 +307,8 @@
 
             if (tipo === "navidad") {
                 cuerpoPagina.classList.add("theme-navidad");
-                brandLogoImg.src = "IMG_7080.PNG";[cite: 4]
-                faviconLogo.href = "IMG_7080.PNG";[cite: 4]
+                brandLogoImg.src = "IMG_7080.PNG";
+                faviconLogo.href = "IMG_7080.PNG";
 
                 tematicaBannerExtra.innerHTML = ``;
                 decoracionesDistribuidas.innerHTML = ``;
@@ -317,20 +320,20 @@
 
                 tematicaBannerExtra.innerHTML = `
                     <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #1e3a8a;">
-                        <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">[cite: 7]
+                        <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">
                     </div>
                 `;
 
                 decoracionesDistribuidas.innerHTML = `
                     <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 100px;">
-                    <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">[cite: 7]
+                    <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">
                     <img src="baila.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 95px;">
                 `;
 
             } else if (tipo === "san-valentin") {
                 cuerpoPagina.classList.add("theme-san-valentin");
-                brandLogoImg.src = "rosa-negro.jpg";[cite: 5]
-                faviconLogo.href = "rosa-negro.jpg";[cite: 5]
+                brandLogoImg.src = "rosa-negro.jpg";
+                faviconLogo.href = "rosa-negro.jpg";
 
                 tematicaBannerExtra.innerHTML = ``;
                 decoracionesDistribuidas.innerHTML = ``;
