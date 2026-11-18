@@ -39,7 +39,7 @@
         }
 
         /* =========================================================
-           1. TEMA NAVIDAD (Línea rosada, botones y categorías actualizadas)
+           1. TEMA NAVIDAD (Tonos rosados unificados en línea, botones y textos)
            ========================================================= */
         body.theme-navidad {
             background-color: #fdf2f4 !important;
@@ -50,7 +50,7 @@
         }
         body.theme-navidad .hero {
             background: #000000 !important;
-            border-bottom: 4px solid #e11d48 !important; /* Línea inferior del header en tono rosado solicitado */
+            border-bottom: 4px solid #db2777 !important; /* Línea inferior del header unificada al rosado */
             color: #ffffff !important;
         }
         body.theme-navidad .brand-text h1,
@@ -59,19 +59,19 @@
         }
         body.theme-navidad .cat-btn {
             background: #ffffff !important;
-            color: #e11d48 !important;
+            color: #db2777 !important;
             border: 1px solid #fbcfe8 !important;
         }
         body.theme-navidad .cat-btn.active,
         body.theme-navidad .cat-btn:hover {
-            background: #e11d48 !important; /* Botón activo con el tono rosado exacto */
+            background: #db2777 !important; /* Botón activo/hover unificado al tono rosado exacto */
             color: #ffffff !important;
-            border-color: #e11d48 !important;
+            border-color: #db2777 !important;
         }
         body.theme-navidad .product-card {
             background: #ffffff !important;
             border: 2px solid #fbcfe8 !important;
-            box-shadow: 0 6px 18px rgba(225, 29, 72, 0.08) !important;
+            box-shadow: 0 6px 18px rgba(219, 39, 119, 0.08) !important;
         }
         body.theme-navidad .product-category-tag {
             color: #db2777 !important;
@@ -93,7 +93,7 @@
         body.theme-navidad footer {
             background: #000000 !important;
             color: #ffffff !important;
-            border-top: 3px solid #e11d48 !important;
+            border-top: 3px solid #db2777 !important;
         }
 
         /* =========================================================
@@ -158,7 +158,7 @@
         body.theme-san-valentin {
             background-color: #fff5f7 !important;
             color: #4c0519 !important;
-            background-image: url('IMG_7085.JPG.jpeg');[cite: 6]
+            background-image: url('IMG_7085.JPG.jpeg');
             background-repeat: repeat;
             background-size: 160px;
         }
@@ -317,20 +317,20 @@
 
                 tematicaBannerExtra.innerHTML = `
                     <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #1e3a8a;">
-                        <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">[cite: 7]
+                        <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">
                     </div>
                 `;
 
                 decoracionesDistribuidas.innerHTML = `
                     <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 100px;">
-                    <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">[cite: 7]
+                    <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">
                     <img src="baila.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 95px;">
                 `;
 
             } else if (tipo === "san-valentin") {
                 cuerpoPagina.classList.add("theme-san-valentin");
-                brandLogoImg.src = "rosa-negro.jpg";[cite: 5]
-                faviconLogo.href = "rosa-negro.jpg";[cite: 5]
+                brandLogoImg.src = "rosa-negro.jpg";
+                faviconLogo.href = "rosa-negro.jpg";
 
                 tematicaBannerExtra.innerHTML = ``;
                 decoracionesDistribuidas.innerHTML = ``;
