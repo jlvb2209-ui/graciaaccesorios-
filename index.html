@@ -27,15 +27,6 @@
             mix-blend-mode: multiply;
         }
 
-        /* Patrón de copos de nieve de fondo esparcidos en Navidad */
-        body.theme-navidad {
-            background-color: #fff0f3 !important;
-            color: #500b1d !important;
-            background-image: url('istockphoto-171579764-612x612.jpg');
-            background-repeat: repeat;
-            background-size: 65px;
-        }
-
         .hero {
             position: relative;
             z-index: 2;
@@ -48,10 +39,17 @@
         }
 
         /* =========================================================
-           1. TEMA NAVIDAD (Rosado, Blanco con Copos y Nuevo Logo)
+           1. TEMA NAVIDAD (Fondo negro en encabezado, copos esparcidos)
            ========================================================= */
+        body.theme-navidad {
+            background-color: #fff0f3 !important;
+            color: #500b1d !important;
+            background-image: url('istockphoto-171579764-612x612.jpg')[cite: 21];
+            background-repeat: repeat;
+            background-size: 65px;
+        }
         body.theme-navidad .hero {
-            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%) !important;
+            background: #000000 !important;
             border-bottom: 4px solid #e11d48 !important;
             color: #ffffff !important;
         }
@@ -88,9 +86,9 @@
             border: 1px solid #be123c !important;
         }
         body.theme-navidad footer {
-            background: #e11d48 !important;
+            background: #000000 !important;
             color: #ffffff !important;
-            border-top: 3px solid #ffffff !important;
+            border-top: 3px solid #e11d48 !important;
         }
 
         /* =========================================================
@@ -150,14 +148,17 @@
         }
 
         /* =========================================================
-           3. TEMA SAN VALENTÍN (Rosado y Blanco - SIN NEGRO)
+           3. TEMA SAN VALENTÍN (Fondo negro en encabezado, fondo de cuadros con corazones)
            ========================================================= */
         body.theme-san-valentin {
             background-color: #fff5f7 !important;
             color: #4c0519 !important;
+            background-image: url('IMG_7085.JPG.jpeg')[cite: 24];
+            background-repeat: repeat;
+            background-size: 140px;
         }
         body.theme-san-valentin .hero {
-            background: linear-gradient(135deg, #be123c 0%, #fb7185 100%) !important;
+            background: #000000 !important;
             border-bottom: 4px solid #e11d48 !important;
         }
         body.theme-san-valentin .brand-text h1,
@@ -193,9 +194,9 @@
             border: 1px solid #be123c !important;
         }
         body.theme-san-valentin footer {
-            background: #be123c !important;
+            background: #000000 !important;
             color: #ffffff !important;
-            border-top: 3px solid #ffffff !important;
+            border-top: 3px solid #e11d48 !important;
         }
 
         @media (max-width: 768px) {
@@ -298,55 +299,54 @@
 
             if (tipo === "navidad") {
                 cuerpoPagina.classList.add("theme-navidad");
-                brandLogoImg.src = "rosa-gorro.jpg"; // Nuevo logo navideño con gorro
-                faviconLogo.href = "rosa-gorro.jpg";
+                brandLogoImg.src = "IMG_7080.PNG"; // Logo con gorro y fondo negro
+                faviconLogo.href = "IMG_7080.PNG";
 
-                // Sin banner grande de imagen, solo limpio arriba con el degradado y el logo nuevo.
                 tematicaBannerExtra.innerHTML = ``;
 
-                // Elementos decorativos distribuidos en Navidad (Árbol, Esfera, Regalo y Copos de nieve)
+                // Elementos distribuidos en Navidad
                 decoracionesDistribuidas.innerHTML = `
-                    <img src="IMG_7075.JPG.jpeg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 110px;" title="Árbol de Navidad">
-                    <img src="IMG_7072.JPG.jpg" class="decoracion-lateral" style="top: 320px; right: 15px; width: 90px;" title="Esfera Navideña">
-                    <img src="IMG_7070.JPG.jpeg" class="decoracion-lateral" style="top: 320px; left: 15px; width: 105px;" title="Regalo Navideño">
-                    <img src="istockphoto-171579764-612x612.jpg" class="decoracion-lateral" style="bottom: 220px; right: 25px; width: 75px; opacity: 0.6;">
-                    <img src="istockphoto-171579764-612x612.jpg" class="decoracion-lateral" style="top: 180px; right: 45%; width: 65px; opacity: 0.5;">
+                    <img src="IMG_7075.JPG.jpeg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 110px;" title="Árbol de Navidad">[cite: 17]
+                    <img src="IMG_7072.JPG.jpg" class="decoracion-lateral" style="top: 320px; right: 15px; width: 90px;" title="Esfera Navideña">[cite: 18]
+                    <img src="IMG_7070.JPG.jpeg" class="decoracion-lateral" style="top: 320px; left: 15px; width: 105px;" title="Regalo Navideño">[cite: 15]
+                    <img src="istockphoto-171579764-612x612.jpg" class="decoracion-lateral" style="bottom: 220px; right: 25px; width: 75px; opacity: 0.6;">[cite: 21]
+                    <img src="istockphoto-171579764-612x612.jpg" class="decoracion-lateral" style="top: 180px; right: 45%; width: 65px; opacity: 0.5;">[cite: 21]
                 `;
 
             } else if (tipo === "independencia") {
                 cuerpoPagina.classList.add("theme-independencia");
-                brandLogoImg.src = "logo-azul.jpg"; // Logo azul para Independencia[cite: 13]
+                brandLogoImg.src = "logo-azul.jpg"; // Logo azul[cite: 13]
                 faviconLogo.href = "logo-azul.jpg";
 
-                // Encabezado patrio con la nueva bandera alargada (banderita.jpg)[cite: 16]
+                // Nueva bandera ondulada para Independencia (`IMG_7082.JPG.jpeg`)
                 tematicaBannerExtra.innerHTML = `
                     <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #1e3a8a;">
-                        <img src="banderita.jpg" alt="Bandera Costa Rica" style="max-height: 140px; width: auto; max-width: 100%; border-radius: 8px;">
+                        <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">[cite: 25]
                     </div>
                 `;
 
                 decoracionesDistribuidas.innerHTML = `
-                    <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 100px;">
-                    <img src="banderita.jpg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 110px;">
-                    <img src="baila.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 95px;">
+                    <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 100px;">[cite: 9]
+                    <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">[cite: 25]
+                    <img src="baila.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 95px;">[cite: 9]
                 `;
 
             } else if (tipo === "san-valentin") {
                 cuerpoPagina.classList.add("theme-san-valentin");
-                brandLogoImg.src = "rosado.jpg"; // Logo rosado para San Valentín[cite: 14]
-                faviconLogo.href = "rosado.jpg";
+                brandLogoImg.src = "rosa-negro.jpg"; // Logo rosado con fondo negro
+                faviconLogo.href = "rosa-negro.jpg";
 
                 tematicaBannerExtra.innerHTML = `
                     <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #e11d48;">
-                        <img src="valen.jpg" alt="Colección San Valentín" style="max-height: 210px; width: auto; max-width: 100%; border-radius: 12px;">
+                        <img src="valen.jpg" alt="Colección San Valentín" style="max-height: 210px; width: auto; max-width: 100%; border-radius: 12px;">[cite: 10]
                     </div>
                 `;
 
                 decoracionesDistribuidas.innerHTML = `
-                    <img src="corazon.jpg" class="decoracion-lateral" style="top: 320px; left: 15px; width: 90px; transform: rotate(-12deg);">
-                    <img src="cora.jpg" class="decoracion-lateral" style="top: 330px; right: 15px; width: 105px;">
-                    <img src="cora.jpg" class="decoracion-lateral" style="bottom: 30px; left: 20px; width: 100px;">
-                    <img src="corazon.jpg" class="decoracion-lateral" style="bottom: 110px; right: 20px; width: 85px; transform: rotate(15deg);">
+                    <img src="corazon.jpg" class="decoracion-lateral" style="top: 320px; left: 15px; width: 90px; transform: rotate(-12deg);">[cite: 11]
+                    <img src="cora.jpg" class="decoracion-lateral" style="top: 330px; right: 15px; width: 105px;">[cite: 12]
+                    <img src="cora.jpg" class="decoracion-lateral" style="bottom: 30px; left: 20px; width: 100px;">[cite: 12]
+                    <img src="corazon.jpg" class="decoracion-lateral" style="bottom: 110px; right: 20px; width: 85px; transform: rotate(15deg);">[cite: 11]
                 `;
             } else {
                 // Tema normal original por defecto (Negro y Dorado con LOGO.PNG)
