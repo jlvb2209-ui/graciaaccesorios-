@@ -12,17 +12,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="hero">
+    <header class="hero" id="heroThemeContainer">
         <div class="w hero-content">
             <!-- Logo ubicado en la esquina izquierda -->
             <img src="LOGO.PNG" alt="Gracia Accesorios Logo" class="brand-logo-img">
             <div class="brand-text">
                 <h1>Gracia Accesorios</h1>
                 <p>Realza tu esencia con gracia✨</p>
-                
                 <p>Haz tu pedido a📲8952-2289</p>
             </div>
         </div>
+        <!-- Contenedor dinámico para la temporada (Navidad, Independencia, San Valentín, etc.) -->
+        <div id="tematicaBannerExtra"></div>
     </header>
     <main class="w catalog-layout">
         <aside>
@@ -34,18 +35,216 @@
             <!-- Se carga dinámicamente desde Firebase -->
         </section>
     </main>
-
     <!-- Modal para ampliar imagen -->
     <div id="imageModal" class="modal">
-        <span class="modal-close" id="modalClose">&times;</span>
+        <span class="modal-close" id="modalClose">×</span>
         <img class="modal-content" id="imgModalExpanded">
     </div>
-
     <footer>
         <div class="w">
-            <p>&copy; 2026 Joyería Exclusiva. Todos los derechos reservados.</p>
+            <p>© 2026 Joyería Exclusiva. Todos los derechos reservados.</p>
         </div>
     </footer>
-    <script type="module" src="script-cliente.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import {
+            initializeFirestore,
+            collection,
+            onSnapshot,
+            query,
+            orderBy,
+            doc
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA5BXWwtk7LsDCXmjYhz5LOIv5tz6U1N_A",
+            authDomain: "gracia-accesorios.firebaseapp.com",
+            projectId: "gracia-accesorios",
+            storageBucket: "gracia-accesorios.firebasestorage.app",
+            messagingSenderId: "843057510032",
+            appId: "1:843057510032:web:148405f256ffd62b5a8a15"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+        const grid = document.getElementById("productGrid");
+        const categoryContainer = document.getElementById("categoryFilter");
+
+        // Elementos del Modal de Imagen
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("imgModalExpanded");
+        const modalClose = document.getElementById("modalClose");
+
+        modalClose.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // --- LECTURA DE TEMÁTICA ACTIVA DESDE FIREBASE ---
+        const heroThemeContainer = document.getElementById("heroThemeContainer");
+        const tematicaBannerExtra = document.getElementById("tematicaBannerExtra");
+
+        onSnapshot(doc(db, "configuracion", "tematica"), (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                aplicarTematicaVisual(data.tematica || "normal");
+            } else {
+                aplicarTematicaVisual("normal");
+            }
+        });
+
+        function aplicarTematicaVisual(tipo) {
+            heroThemeContainer.className = "hero";
+            tematicaBannerExtra.innerHTML = "";
+
+            if (tipo === "navidad") {
+                heroThemeContainer.style.background = "linear-gradient(135deg, #4a0000 0%, #1a0000 100%)";
+                heroThemeContainer.style.borderBottom = "1px solid #d4af37";
+                tematicaBannerExtra.innerHTML = `
+                    <div style="text-align: center; padding: 15px 16px 5px 16px;">
+                        <span style="color: #ffd700; font-family: 'Cinzel', serif; font-size: 1.3rem;">❄️ ¡Esta Navidad, regala elegancia! ❄️</span>
+                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 5px 0; font-size: 1.8rem;">Colección Navidad</h2>
+                    </div>
+                `;
+            } else if (tipo === "independencia") {
+                heroThemeContainer.style.background = "linear-gradient(135deg, #002b49 0%, #0a0a0a 100%)";
+                heroThemeContainer.style.borderBottom = "1px solid #ef4444";
+                tematicaBannerExtra.innerHTML = `
+                    <div style="text-align: center; padding: 15px 16px 5px 16px;">
+                        <span style="color: #60a5fa; font-family: 'Cinzel', serif; font-size: 1.3rem;">🇨🇷 ¡Viva Costa Rica! 🇨🇷</span>
+                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 5px 0; font-size: 1.8rem;">15 de Setiembre - Día de la Independencia</h2>
+                    </div>
+                `;
+            } else if (tipo === "san-valentin") {
+                heroThemeContainer.style.background = "linear-gradient(135deg, #831843 0%, #1a050f 100%)";
+                heroThemeContainer.style.borderBottom = "1px solid #f4b6c2";
+                tematicaBannerExtra.innerHTML = `
+                    <div style="text-align: center; padding: 15px 16px 5px 16px;">
+                        <span style="color: #f4b6c2; font-family: 'Cinzel', serif; font-size: 1.2rem;">💕 Porque el amor también se lleva puesto 💕</span>
+                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 5px 0; font-size: 1.8rem;">Colección San Valentín</h2>
+                    </div>
+                `;
+            } else {
+                heroThemeContainer.style.background = "#000000";
+                heroThemeContainer.style.borderBottom = "1px solid var(--pink-accent)";
+            }
+        }
+
+        let productosCache = [];
+        let categoriasCache = [];
+        let categoriaActual = "todos";
+        let limiteVisible = 24; 
+
+        // Cargar productos desde Firebase ordenados
+        const qProducts = query(collection(db, "jewelry"), orderBy("creado", "desc"));
+        onSnapshot(qProducts, (snapshot) => {
+            productosCache = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.activo !== false) {
+                    productosCache.push({ id: doc.id, ...data });
+                }
+            });
+            renderizarProductos(categoriaActual);
+        }, (error) => {
+            console.error("Error al leer productos:", error);
+        });
+
+        onSnapshot(collection(db, "categories"), (snapshot) => {
+            categoriasCache = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.nombre) {
+                    categoriasCache.push(data.nombre.trim().toLowerCase());
+                }
+            });
+            actualizarBotonesCategorias();
+        }, (error) => {
+            console.error("Error al leer categorías:", error);
+        });
+
+        function actualizarBotonesCategorias() {
+            if (!categoryContainer) return;
+            
+            let html = `<button class="cat-btn ${categoriaActual === 'todos' ? 'active' : ''}" data-category="todos">✨ Ver Todo</button>`;
+            
+            categoriasCache.forEach(cat => {
+                const nombreVisual = cat.charAt(0).toUpperCase() + cat.slice(1);
+                html += `<button class="cat-btn ${categoriaActual === cat ? 'active' : ''}" data-category="${cat}">${nombreVisual}</button>`;
+            });
+            
+            categoryContainer.innerHTML = html;
+            
+            categoryContainer.querySelectorAll(".cat-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    categoryContainer.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    categoriaActual = btn.getAttribute("data-category");
+                    limiteVisible = 24; 
+                    renderizarProductos(categoriaActual);
+                });
+            });
+        }
+
+        function renderizarProductos(categoriaFiltro) {
+            if (!grid) return;
+            
+            const filtrados = productosCache.filter(p => 
+                categoriaFiltro === "todos" || (p.categoria && p.categoria.trim().toLowerCase() === categoriaFiltro)
+            );
+            
+            if (filtrados.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px 0;">No hay productos disponibles en esta categoría.</p>`;
+                return;
+            }
+            const productosAMostrar = filtrados.slice(0, limiteVisible);
+            
+            let contenidoHtml = productosAMostrar.map(p => `
+                <div class="product-card" data-category="${p.categoria}">
+                    <div class="product-img-container">
+                        <img src="${p.imagenUrl}" alt="${p.nombre}" class="zoomable-img" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <div>
+                            <div class="product-category-tag">${p.categoria}</div>
+                            <h3 class="product-title">${p.nombre}</h3>
+                        </div>
+                        <div class="product-price-box">
+                            ₡${(p.precio || 0).toLocaleString()}
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+
+            if (limiteVisible < filtrados.length) {
+                contenidoHtml += `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 20px 0;">
+                        <button id="btnCargarMas" style="background: var(--gold); color: #000; border: none; padding: 12px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">
+                            Cargar más productos (${filtrados.length - limiteVisible} restantes)
+                        </button>
+                    </div>
+                `;
+            }
+            
+            grid.innerHTML = contenidoHtml;
+            const btnMas = document.getElementById("btnCargarMas");
+            if (btnMas) {
+                btnMas.addEventListener("click", () => {
+                    limiteVisible += 24; 
+                    renderizarProductos(categoriaActual);
+                });
+            }
+            grid.querySelectorAll(".zoomable-img").forEach(img => {
+                img.addEventListener("click", () => {
+                    modal.style.display = "flex";
+                    modalImg.src = img.src;
+                });
+            });
+        }
+    </script>
 </body>
 </html>
