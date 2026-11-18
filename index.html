@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="LOGO.PNG">
+    <link rel="icon" type="image/png" href="LOGO.PNG" id="faviconLogo">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* --- ESTILOS BASE Y DECORACIONES FLOTANTES --- */
@@ -24,7 +24,7 @@
             z-index: 1;
             opacity: 0.9;
             transition: all 0.4s ease;
-            mix-blend-mode: multiply; /* Ayuda a integrar fondos blancos de las imágenes */
+            mix-blend-mode: multiply;
         }
 
         .hero {
@@ -39,15 +39,15 @@
         }
 
         /* =========================================================
-           1. TEMA NAVIDAD (Verde, Rojo y Blanco - SIN NEGRO)
+           1. TEMA NAVIDAD (Rosado y Blanco - SIN NEGRO)
            ========================================================= */
         body.theme-navidad {
-            background-color: #ffffff !important;
-            color: #1e293b !important;
+            background-color: #fff0f3 !important;
+            color: #500b1d !important;
         }
         body.theme-navidad .hero {
-            background: linear-gradient(135deg, #14532d 0%, #b91c1c 100%) !important;
-            border-bottom: 4px solid #166534 !important;
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%) !important;
+            border-bottom: 4px solid #e11d48 !important;
             color: #ffffff !important;
         }
         body.theme-navidad .brand-text h1,
@@ -62,44 +62,44 @@
             border-top: 3px solid #ffffff;
         }
         body.theme-navidad .cat-btn {
-            background: #f0fdf4 !important;
-            color: #14532d !important;
-            border: 1px solid #bbf7d0 !important;
+            background: #ffffff !important;
+            color: #e11d48 !important;
+            border: 1px solid #fecdd3 !important;
         }
         body.theme-navidad .cat-btn.active,
         body.theme-navidad .cat-btn:hover {
-            background: #dc2626 !important;
+            background: #e11d48 !important;
             color: #ffffff !important;
-            border-color: #dc2626 !important;
+            border-color: #e11d48 !important;
         }
         body.theme-navidad .product-card {
             background: #ffffff !important;
-            border: 2px solid #dcfce7 !important;
-            box-shadow: 0 6px 18px rgba(20, 83, 45, 0.08) !important;
+            border: 2px solid #ffe4e6 !important;
+            box-shadow: 0 6px 18px rgba(225, 29, 72, 0.08) !important;
         }
         body.theme-navidad .product-category-tag {
-            color: #15803d !important;
+            color: #e11d48 !important;
             font-weight: 700 !important;
         }
         body.theme-navidad .product-title {
-            color: #1f2937 !important;
+            color: #881337 !important;
         }
         body.theme-navidad .product-price-box {
-            background: #dc2626 !important;
+            background: #e11d48 !important;
             color: #ffffff !important;
-            border: 1px solid #991b1b !important;
+            border: 1px solid #be123c !important;
         }
         body.theme-navidad footer {
-            background: #14532d !important;
+            background: #e11d48 !important;
             color: #ffffff !important;
-            border-top: 3px solid #dc2626 !important;
+            border-top: 3px solid #ffffff !important;
         }
 
         /* =========================================================
            2. TEMA INDEPENDENCIA (Azul, Blanco y Rojo - SIN NEGRO)
            ========================================================= */
         body.theme-independencia {
-            background-color: #ffffff !important;
+            background-color: #f8fafc !important;
             color: #0f172a !important;
         }
         body.theme-independencia .hero {
@@ -152,7 +152,7 @@
         }
 
         /* =========================================================
-           3. TEMA SAN VALENTÍN (Rojo y Blanco - SIN NEGRO)
+           3. TEMA SAN VALENTÍN (Rosado y Blanco - SIN NEGRO)
            ========================================================= */
         body.theme-san-valentin {
             background-color: #fff5f7 !important;
@@ -200,10 +200,9 @@
             border-top: 3px solid #ffffff !important;
         }
 
-        /* Ocultar decoraciones laterales en pantallas muy pequeñas para no tapar productos */
         @media (max-width: 768px) {
             .decoracion-lateral {
-                width: 65px !important;
+                width: 60px !important;
                 opacity: 0.5;
             }
         }
@@ -211,20 +210,18 @@
 </head>
 <body id="cuerpoPagina">
 
-    <!-- Contenedor donde se inyectan las figuras distribuidas según la temporada -->
     <div id="decoracionesDistribuidas"></div>
 
     <header class="hero" id="heroThemeContainer">
         <div class="w hero-content">
-            <!-- Logo ubicado en la esquina izquierda -->
-            <img src="LOGO.PNG" alt="Gracia Accesorios Logo" class="brand-logo-img">
+            <!-- Logo dinámico según la temática -->
+            <img src="LOGO.PNG" alt="Gracia Accesorios Logo" class="brand-logo-img" id="brandLogoImg">
             <div class="brand-text">
                 <h1>Gracia Accesorios</h1>
                 <p>Realza tu esencia con gracia✨</p>
                 <p>Haz tu pedido a📲8952-2289</p>
             </div>
         </div>
-        <!-- Encabezado gráfico de la temporada -->
         <div id="tematicaBannerExtra"></div>
     </header>
 
@@ -278,8 +275,9 @@
         const cuerpoPagina = document.getElementById("cuerpoPagina");
         const tematicaBannerExtra = document.getElementById("tematicaBannerExtra");
         const decoracionesDistribuidas = document.getElementById("decoracionesDistribuidas");
+        const brandLogoImg = document.getElementById("brandLogoImg");
+        const faviconLogo = document.getElementById("faviconLogo");
 
-        // Modal de imagen
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("imgModalExpanded");
         const modalClose = document.getElementById("modalClose");
@@ -287,7 +285,6 @@
         modalClose.addEventListener("click", () => { modal.style.display = "none"; });
         modal.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
 
-        // --- ESCUCHA EN TIEMPO REAL DE LA TEMÁTICA ---
         onSnapshot(doc(db, "configuracion", "tematica"), (docSnap) => {
             if (docSnap.exists()) {
                 aplicarTematica(docSnap.data().tematica || "normal");
@@ -303,62 +300,63 @@
 
             if (tipo === "navidad") {
                 cuerpoPagina.classList.add("theme-navidad");
-                
-                // Banner largo de Navidad
+                brandLogoImg.src = "rosado.jpg"; // Logo rosado para Navidad
+                faviconLogo.href = "rosado.jpg";
+
+                // Banner largo original de Navidad
                 tematicaBannerExtra.innerHTML = `
                     <img src="banner-navidad.png" alt="Colección Navidad" class="banner-largo-navidad">
                 `;
 
-                // Regalos y copitos distribuidos por la pantalla
+                // Nuevas imágenes de Navidad distribuidas (Árbol, Esfera y Caja de regalo)
                 decoracionesDistribuidas.innerHTML = `
-                    <img src="regalo.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 120px;">
-                    <img src="regalo.jpg" class="decoracion-lateral" style="top: 320px; right: 15px; width: 100px; transform: rotate(12deg);">
-                    <img src="copitos.jpg" class="decoracion-lateral" style="top: 280px; left: 20px; width: 95px;">
-                    <img src="copitos.jpg" class="decoracion-lateral" style="bottom: 140px; right: 20px; width: 110px;">
+                    <img src="IMG_7075.JPG.jpeg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 110px;" title="Árbol de Navidad">
+                    <img src="IMG_7072.JPG.jpg" class="decoracion-lateral" style="top: 320px; right: 15px; width: 90px;" title="Esfera Navideña">
+                    <img src="IMG_7070.JPG.jpeg" class="decoracion-lateral" style="top: 320px; left: 15px; width: 105px;" title="Regalo Navideño">
+                    <img src="IMG_7072.JPG.jpg" class="decoracion-lateral" style="bottom: 120px; right: 20px; width: 85px;">
                 `;
 
             } else if (tipo === "independencia") {
                 cuerpoPagina.classList.add("theme-independencia");
-                
-                // Encabezado patrio con bandera
+                brandLogoImg.src = "logo-azul.jpg"; // Logo azul para Independencia
+                faviconLogo.href = "logo-azul.jpg";
+
+                // Encabezado patrio con la nueva bandera alargada (banderita.jpg)
                 tematicaBannerExtra.innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 20px; padding: 15px; background: #ffffff; border-top: 3px solid #dc2626;">
-                        <img src="inde.jpg" alt="Bandera Costa Rica" style="height: 85px; border-radius: 8px; mix-blend-mode: multiply;">
-                        <div style="text-align: center;">
-                            <span style="color: #dc2626; font-weight: 700; font-size: 1rem; letter-spacing: 1px;">🇨🇷 15 DE SETIEMBRE 🇨🇷</span>
-                            <h2 style="font-family: 'Great Vibes', cursive; color: #1e3a8a; font-size: 3rem; margin: 0; line-height: 1;">Día de la Independencia</h2>
-                            <span style="color: #1e3a8a; font-weight: 600; font-size: 0.95rem;">¡Pura Vida, Costa Rica!</span>
-                        </div>
-                        <img src="baila.jpg" alt="Traje Típico" style="height: 95px; mix-blend-mode: multiply;">
+                    <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #1e3a8a;">
+                        <img src="banderita.jpg" alt="Bandera Costa Rica" style="max-height: 140px; width: auto; max-width: 100%; border-radius: 8px;">
                     </div>
                 `;
 
-                // Banderas y niñas típicas distribuidas a los costados
+                // Bandera y niña típica distribuidas a los costados
                 decoracionesDistribuidas.innerHTML = `
-                    <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 110px;">
-                    <img src="inde.jpg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px; transform: rotate(-8deg);">
-                    <img src="inde.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 110px; transform: rotate(8deg);">
+                    <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 100px;">
+                    <img src="banderita.jpg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 110px;">
+                    <img src="baila.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 95px;">
                 `;
 
             } else if (tipo === "san-valentin") {
                 cuerpoPagina.classList.add("theme-san-valentin");
-                
-                // Encabezado San Valentín con tu imagen valen.jpg
+                brandLogoImg.src = "rosado.jpg"; // Logo rosado para San Valentín
+                faviconLogo.href = "rosado.jpg";
+
                 tematicaBannerExtra.innerHTML = `
                     <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #e11d48;">
                         <img src="valen.jpg" alt="Colección San Valentín" style="max-height: 210px; width: auto; max-width: 100%; border-radius: 12px;">
                     </div>
                 `;
 
-                // Corazones distribuidos por la página
                 decoracionesDistribuidas.innerHTML = `
-                    <img src="corazon.jpg" class="decoracion-lateral" style="top: 320px; left: 15px; width: 100px; transform: rotate(-12deg);">
-                    <img src="cora.jpg" class="decoracion-lateral" style="top: 330px; right: 15px; width: 115px;">
-                    <img src="cora.jpg" class="decoracion-lateral" style="bottom: 30px; left: 20px; width: 110px;">
-                    <img src="corazon.jpg" class="decoracion-lateral" style="bottom: 110px; right: 20px; width: 95px; transform: rotate(15deg);">
+                    <img src="corazon.jpg" class="decoracion-lateral" style="top: 320px; left: 15px; width: 90px; transform: rotate(-12deg);">
+                    <img src="cora.jpg" class="decoracion-lateral" style="top: 330px; right: 15px; width: 105px;">
+                    <img src="cora.jpg" class="decoracion-lateral" style="bottom: 30px; left: 20px; width: 100px;">
+                    <img src="corazon.jpg" class="decoracion-lateral" style="bottom: 110px; right: 20px; width: 85px; transform: rotate(15deg);">
                 `;
+            } else {
+                // Tema normal original por defecto (Negro y Dorado con LOGO.PNG)
+                brandLogoImg.src = "LOGO.PNG";
+                faviconLogo.href = "LOGO.PNG";
             }
-            // Si es "normal", no agrega clases extra y mantiene el diseño negro/dorado original intacto
         }
 
         let productosCache = [];
