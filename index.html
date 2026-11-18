@@ -7,97 +7,68 @@
     <meta name="theme-color" content="#0a0a0a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="LOGO.PNG">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* --- ESTILOS DINÁMICOS GLOBALES PARA TEMÁTICAS --- */
+        /* --- ESTILOS IDÉNTICOS A TUS FOTOGRAFÍAS DE TEMPORADA --- */
         
-        /* Tema NAVIDAD */
-        body.theme-navidad {
-            background-color: #1a0000 !important;
-            color: #ffffff !important;
+        .hero {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all 0.5s ease;
         }
+
+        /* Tema Normal / Estándar */
+        body.theme-normal .hero {
+            background: #000000 !important;
+            border-bottom: 1px solid var(--pink-accent);
+        }
+
+        /* Tema NAVIDAD (Fondo oscuro con decoración navideña y caja de regalo) */
         body.theme-navidad .hero {
-            background: linear-gradient(135deg, #4a0000 0%, #1a0000 100%) !important;
-            border-bottom: 2px solid #d4af37 !important;
-        }
-        body.theme-navidad .product-card {
-            background: #240a0a !important;
-            border-color: #4a1515 !important;
-        }
-        body.theme-navidad .product-price-box {
-            background: #800000 !important;
-            color: #ffffff !important;
-            border-color: #d4af37 !important;
-        }
-        body.theme-navidad .product-category-tag {
-            color: #ffd700 !important;
-        }
-        body.theme-navidad .cat-btn.active, body.theme-navidad .cat-btn:hover {
-            background: #d4af37 !important;
-            color: #000 !important;
-            border-color: #d4af37 !important;
+            background: linear-gradient(rgba(20, 0, 0, 0.75), rgba(10, 0, 0, 0.85)), url('navidad-bg.jpg') center/cover !important;
+            border-bottom: 2px solid #d4af37;
         }
 
-        /* Tema 15 DE SETIEMBRE / INDEPENDENCIA */
-        body.theme-independencia {
-            background-color: #061421 !important;
-            color: #ffffff !important;
-        }
+        /* Tema 15 DE SETIEMBRE / INDEPENDENCIA (Fondo tricolor / patriótico) */
         body.theme-independencia .hero {
-            background: linear-gradient(135deg, #0b2545 0%, #061421 100%) !important;
-            border-bottom: 2px solid #ef4444 !important;
-        }
-        body.theme-independencia .product-card {
-            background: #0d1b2a !important;
-            border-color: #1b263b !important;
-        }
-        body.theme-independencia .product-price-box {
-            background: #1d4ed8 !important;
-            color: #ffffff !important;
-            border-color: #60a5fa !important;
-        }
-        body.theme-independencia .product-category-tag {
-            color: #60a5fa !important;
-        }
-        body.theme-independencia .cat-btn.active, body.theme-independencia .cat-btn:hover {
-            background: #3b82f6 !important;
-            color: #fff !important;
-            border-color: #3b82f6 !important;
+            background: linear-gradient(rgba(0, 20, 50, 0.7), rgba(5, 10, 20, 0.85)), url('independencia-bg.jpg') center/cover !important;
+            border-bottom: 2px solid #ef4444;
         }
 
-        /* Tema SAN VALENTÍN */
-        body.theme-san-valentin {
-            background-color: #1a050f !important;
-            color: #ffffff !important;
-        }
+        /* Tema SAN VALENTÍN (Fondo rojo/rosa con corazones y caja de regalo) */
         body.theme-san-valentin .hero {
-            background: linear-gradient(135deg, #831843 0%, #1a050f 100%) !important;
-            border-bottom: 2px solid #f4b6c2 !important;
+            background: linear-gradient(rgba(100, 15, 40, 0.7), rgba(30, 5, 15, 0.85)), url('valentin-bg.jpg') center/cover !important;
+            border-bottom: 2px solid #f4b6c2;
         }
-        body.theme-san-valentin .product-card {
-            background: #2b0d1a !important;
-            border-color: #4c1d30 !important;
+
+        /* Estilos generales para los títulos temáticos flotantes */
+        .banner-tematica-contenido {
+            text-align: center;
+            padding: 20px 16px 10px 16px;
         }
-        body.theme-san-valentin .product-price-box {
-            background: #9d174d !important;
-            color: #ffffff !important;
-            border-color: #f4b6c2 !important;
+        .banner-tematica-contenido .sub-frase {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            letter-spacing: 1px;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
-        body.theme-san-valentin .product-category-tag {
-            color: #f4b6c2 !important;
-        }
-        body.theme-san-valentin .cat-btn.active, body.theme-san-valentin .cat-btn:hover {
-            background: #f4b6c2 !important;
-            color: #000 !important;
-            border-color: #f4b6c2 !important;
+        .banner-tematica-contenido .titulo-principal {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            margin: 5px 0 0 0;
+            line-height: 1.1;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.9);
         }
     </style>
 </head>
 <body id="cuerpoPagina">
     <header class="hero" id="heroThemeContainer">
-        <div class="w hero-content">
+        <div class="w hero-content" style="position: relative; z-index: 2;">
             <!-- Logo ubicado en la esquina izquierda -->
             <img src="LOGO.PNG" alt="Gracia Accesorios Logo" class="brand-logo-img">
             <div class="brand-text">
@@ -106,8 +77,8 @@
                 <p>Haz tu pedido a📲8952-2289</p>
             </div>
         </div>
-        <!-- Banner visual descriptivo de la temporada (idéntico a tus referencias visuales) -->
-        <div id="tematicaBannerExtra"></div>
+        <!-- Banner visual idéntico a tus fotos de referencia -->
+        <div id="tematicaBannerExtra" style="position: relative; z-index: 2;"></div>
     </header>
     <main class="w catalog-layout">
         <aside>
@@ -155,64 +126,55 @@
         const categoryContainer = document.getElementById("categoryFilter");
         const cuerpoPagina = document.getElementById("cuerpoPagina");
 
-        // Elementos del Modal de Imagen
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("imgModalExpanded");
         const modalClose = document.getElementById("modalClose");
 
-        modalClose.addEventListener("click", () => {
-            modal.style.display = "none";
-        });
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.style.display = "none";
-            }
-        });
+        modalClose.addEventListener("click", () => { modal.style.display = "none"; });
+        modal.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
 
-        // --- LECTURA EN TIEMPO REAL DE LA TEMÁTICA DESDE FIREBASE ---
         const tematicaBannerExtra = document.getElementById("tematicaBannerExtra");
 
+        // Lectura de la temática en tiempo real desde Firebase
         onSnapshot(doc(db, "configuracion", "tematica"), (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                aplicarTematicaCompleta(data.tematica || "normal");
+                aplicarDisenoExacto(data.tematica || "normal");
             } else {
-                aplicarTematicaCompleta("normal");
+                aplicarDisenoExacto("normal");
             }
         });
 
-        function aplicarTematicaCompleta(tipo) {
-            // Limpiar clases previas del body
+        function aplicarDisenoExacto(tipo) {
             cuerpoPagina.className = "";
             tematicaBannerExtra.innerHTML = "";
 
             if (tipo === "navidad") {
                 cuerpoPagina.classList.add("theme-navidad");
                 tematicaBannerExtra.innerHTML = `
-                    <div style="text-align: center; padding: 18px 16px 8px 16px;">
-                        <span style="color: #ffd700; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px;">❄️ ¡Esta Navidad, regala elegancia! ❄️</span>
-                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 6px 0; font-size: 1.9rem; text-transform: uppercase;">Colección Navidad</h2>
+                    <div class="banner-tematica-contenido">
+                        <span class="sub-frase" style="color: #ffd700;">❄️ ¡Esta Navidad, regala elegancia! ❄️</span>
+                        <h2 class="titulo-principal" style="color: #fca5a5;">Colección Navidad</h2>
                     </div>
                 `;
             } else if (tipo === "independencia") {
                 cuerpoPagina.classList.add("theme-independencia");
                 tematicaBannerExtra.innerHTML = `
-                    <div style="text-align: center; padding: 18px 16px 8px 16px;">
-                        <span style="color: #60a5fa; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px;">🇨🇷 ¡Viva Costa Rica! Pura Vida, Costa Rica! 🇨🇷</span>
-                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 6px 0; font-size: 1.9rem; text-transform: uppercase;">15 de Setiembre - Día de la Independencia</h2>
+                    <div class="banner-tematica-contenido">
+                        <span class="sub-frase" style="color: #93c5fd;">🇨🇷 ¡Viva Costa Rica! Pura Vida, Costa Rica! 🇨🇷</span>
+                        <h2 class="titulo-principal" style="color: #ffffff;">Día de la Independencia</h2>
                     </div>
                 `;
             } else if (tipo === "san-valentin") {
                 cuerpoPagina.classList.add("theme-san-valentin");
                 tematicaBannerExtra.innerHTML = `
-                    <div style="text-align: center; padding: 18px 16px 8px 16px;">
-                        <span style="color: #f4b6c2; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px;">💕 Porque el amor también se lleva puesto 💕</span>
-                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 6px 0; font-size: 1.9rem; text-transform: uppercase;">Colección San Valentín</h2>
+                    <div class="banner-tematica-contenido">
+                        <span class="sub-frase" style="color: #f4b6c2;">💕 Porque el amor también se lleva puesto 💕</span>
+                        <h2 class="titulo-principal" style="color: #ffccd5;">Colección San Valentín</h2>
                     </div>
                 `;
             } else {
-                // Tema normal por defecto
-                cuerpoPagina.className = "";
+                cuerpoPagina.classList.add("theme-normal");
             }
         }
 
@@ -221,7 +183,6 @@
         let categoriaActual = "todos";
         let limiteVisible = 24; 
 
-        // Cargar productos desde Firebase ordenados
         const qProducts = query(collection(db, "jewelry"), orderBy("creado", "desc"));
         onSnapshot(qProducts, (snapshot) => {
             productosCache = [];
@@ -232,8 +193,6 @@
                 }
             });
             renderizarProductos(categoriaActual);
-        }, (error) => {
-            console.error("Error al leer productos:", error);
         });
 
         onSnapshot(collection(db, "categories"), (snapshot) => {
@@ -245,22 +204,16 @@
                 }
             });
             actualizarBotonesCategorias();
-        }, (error) => {
-            console.error("Error al leer categorías:", error);
         });
 
         function actualizarBotonesCategorias() {
             if (!categoryContainer) return;
-            
             let html = `<button class="cat-btn ${categoriaActual === 'todos' ? 'active' : ''}" data-category="todos">✨ Ver Todo</button>`;
-            
             categoriasCache.forEach(cat => {
                 const nombreVisual = cat.charAt(0).toUpperCase() + cat.slice(1);
                 html += `<button class="cat-btn ${categoriaActual === cat ? 'active' : ''}" data-category="${cat}">${nombreVisual}</button>`;
             });
-            
             categoryContainer.innerHTML = html;
-            
             categoryContainer.querySelectorAll(".cat-btn").forEach(btn => {
                 btn.addEventListener("click", () => {
                     categoryContainer.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
@@ -274,17 +227,14 @@
 
         function renderizarProductos(categoriaFiltro) {
             if (!grid) return;
-            
             const filtrados = productosCache.filter(p => 
                 categoriaFiltro === "todos" || (p.categoria && p.categoria.trim().toLowerCase() === categoriaFiltro)
             );
-            
             if (filtrados.length === 0) {
                 grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px 0;">No hay productos disponibles en esta categoría.</p>`;
                 return;
             }
             const productosAMostrar = filtrados.slice(0, limiteVisible);
-            
             let contenidoHtml = productosAMostrar.map(p => `
                 <div class="product-card" data-category="${p.categoria}">
                     <div class="product-img-container">
@@ -311,7 +261,6 @@
                     </div>
                 `;
             }
-            
             grid.innerHTML = contenidoHtml;
             const btnMas = document.getElementById("btnCargarMas");
             if (btnMas) {
