@@ -39,7 +39,7 @@
         }
 
         /* =========================================================
-           1. TEMA NAVIDAD (Tonos rosados unificados en línea, botones y textos)
+           1. TEMA NAVIDAD (Fondo con copitos, precios, nombres y modal en tono rosado)
            ========================================================= */
         body.theme-navidad {
             background-color: #fdf2f4 !important;
@@ -50,7 +50,7 @@
         }
         body.theme-navidad .hero {
             background: #000000 !important;
-            border-bottom: 4px solid #db2777 !important; /* Línea inferior del header unificada al rosado */
+            border-bottom: 4px solid #e11d48 !important;
             color: #ffffff !important;
         }
         body.theme-navidad .brand-text h1,
@@ -59,41 +59,44 @@
         }
         body.theme-navidad .cat-btn {
             background: #ffffff !important;
-            color: #db2777 !important;
-            border: 1px solid #fbcfe8 !important;
+            color: #e11d48 !important;
+            border: 1px solid #fecdd3 !important;
         }
         body.theme-navidad .cat-btn.active,
         body.theme-navidad .cat-btn:hover {
-            background: #db2777 !important; /* Botón activo/hover unificado al tono rosado exacto */
+            background: #e11d48 !important;
             color: #ffffff !important;
-            border-color: #db2777 !important;
+            border-color: #e11d48 !important;
         }
         body.theme-navidad .product-card {
             background: #ffffff !important;
             border: 2px solid #fbcfe8 !important;
-            box-shadow: 0 6px 18px rgba(219, 39, 119, 0.08) !important;
+            box-shadow: 0 6px 18px rgba(225, 29, 72, 0.08) !important;
         }
         body.theme-navidad .product-category-tag {
             color: #db2777 !important;
             font-weight: 700 !important;
         }
+        /* Nombre de los productos con tono rosado acorde */
         body.theme-navidad .product-title {
             color: #9f1239 !important;
             font-weight: 700 !important;
         }
+        /* Caja de precios con fondo en tono rosado */
         body.theme-navidad .product-price-box {
             background: #fce7f3 !important;
             color: #be123c !important;
             border: 1px solid #f43f5e !important;
             font-weight: 700 !important;
         }
+        /* Fondo al presionar/ampliar la imagen (Modal) con el tono rosado */
         body.theme-navidad .modal {
             background-color: rgba(253, 242, 244, 0.95) !important;
         }
         body.theme-navidad footer {
             background: #000000 !important;
             color: #ffffff !important;
-            border-top: 3px solid #db2777 !important;
+            border-top: 3px solid #e11d48 !important;
         }
 
         /* =========================================================
@@ -304,8 +307,8 @@
 
             if (tipo === "navidad") {
                 cuerpoPagina.classList.add("theme-navidad");
-                brandLogoImg.src = "IMG_7080.PNG";[cite: 4]
-                faviconLogo.href = "IMG_7080.PNG";[cite: 4]
+                brandLogoImg.src = "IMG_7080.PNG";
+                faviconLogo.href = "IMG_7080.PNG";
 
                 tematicaBannerExtra.innerHTML = ``;
                 decoracionesDistribuidas.innerHTML = ``;
