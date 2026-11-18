@@ -10,8 +10,92 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="LOGO.PNG">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* --- ESTILOS DINÁMICOS GLOBALES PARA TEMÁTICAS --- */
+        
+        /* Tema NAVIDAD */
+        body.theme-navidad {
+            background-color: #1a0000 !important;
+            color: #ffffff !important;
+        }
+        body.theme-navidad .hero {
+            background: linear-gradient(135deg, #4a0000 0%, #1a0000 100%) !important;
+            border-bottom: 2px solid #d4af37 !important;
+        }
+        body.theme-navidad .product-card {
+            background: #240a0a !important;
+            border-color: #4a1515 !important;
+        }
+        body.theme-navidad .product-price-box {
+            background: #800000 !important;
+            color: #ffffff !important;
+            border-color: #d4af37 !important;
+        }
+        body.theme-navidad .product-category-tag {
+            color: #ffd700 !important;
+        }
+        body.theme-navidad .cat-btn.active, body.theme-navidad .cat-btn:hover {
+            background: #d4af37 !important;
+            color: #000 !important;
+            border-color: #d4af37 !important;
+        }
+
+        /* Tema 15 DE SETIEMBRE / INDEPENDENCIA */
+        body.theme-independencia {
+            background-color: #061421 !important;
+            color: #ffffff !important;
+        }
+        body.theme-independencia .hero {
+            background: linear-gradient(135deg, #0b2545 0%, #061421 100%) !important;
+            border-bottom: 2px solid #ef4444 !important;
+        }
+        body.theme-independencia .product-card {
+            background: #0d1b2a !important;
+            border-color: #1b263b !important;
+        }
+        body.theme-independencia .product-price-box {
+            background: #1d4ed8 !important;
+            color: #ffffff !important;
+            border-color: #60a5fa !important;
+        }
+        body.theme-independencia .product-category-tag {
+            color: #60a5fa !important;
+        }
+        body.theme-independencia .cat-btn.active, body.theme-independencia .cat-btn:hover {
+            background: #3b82f6 !important;
+            color: #fff !important;
+            border-color: #3b82f6 !important;
+        }
+
+        /* Tema SAN VALENTÍN */
+        body.theme-san-valentin {
+            background-color: #1a050f !important;
+            color: #ffffff !important;
+        }
+        body.theme-san-valentin .hero {
+            background: linear-gradient(135deg, #831843 0%, #1a050f 100%) !important;
+            border-bottom: 2px solid #f4b6c2 !important;
+        }
+        body.theme-san-valentin .product-card {
+            background: #2b0d1a !important;
+            border-color: #4c1d30 !important;
+        }
+        body.theme-san-valentin .product-price-box {
+            background: #9d174d !important;
+            color: #ffffff !important;
+            border-color: #f4b6c2 !important;
+        }
+        body.theme-san-valentin .product-category-tag {
+            color: #f4b6c2 !important;
+        }
+        body.theme-san-valentin .cat-btn.active, body.theme-san-valentin .cat-btn:hover {
+            background: #f4b6c2 !important;
+            color: #000 !important;
+            border-color: #f4b6c2 !important;
+        }
+    </style>
 </head>
-<body>
+<body id="cuerpoPagina">
     <header class="hero" id="heroThemeContainer">
         <div class="w hero-content">
             <!-- Logo ubicado en la esquina izquierda -->
@@ -22,7 +106,7 @@
                 <p>Haz tu pedido a📲8952-2289</p>
             </div>
         </div>
-        <!-- Contenedor dinámico para la temporada (Navidad, Independencia, San Valentín, etc.) -->
+        <!-- Banner visual descriptivo de la temporada (idéntico a tus referencias visuales) -->
         <div id="tematicaBannerExtra"></div>
     </header>
     <main class="w catalog-layout">
@@ -69,6 +153,7 @@
         const db = initializeFirestore(app, { experimentalForceLongPolling: true });
         const grid = document.getElementById("productGrid");
         const categoryContainer = document.getElementById("categoryFilter");
+        const cuerpoPagina = document.getElementById("cuerpoPagina");
 
         // Elementos del Modal de Imagen
         const modal = document.getElementById("imageModal");
@@ -84,53 +169,50 @@
             }
         });
 
-        // --- LECTURA DE TEMÁTICA ACTIVA DESDE FIREBASE ---
-        const heroThemeContainer = document.getElementById("heroThemeContainer");
+        // --- LECTURA EN TIEMPO REAL DE LA TEMÁTICA DESDE FIREBASE ---
         const tematicaBannerExtra = document.getElementById("tematicaBannerExtra");
 
         onSnapshot(doc(db, "configuracion", "tematica"), (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                aplicarTematicaVisual(data.tematica || "normal");
+                aplicarTematicaCompleta(data.tematica || "normal");
             } else {
-                aplicarTematicaVisual("normal");
+                aplicarTematicaCompleta("normal");
             }
         });
 
-        function aplicarTematicaVisual(tipo) {
-            heroThemeContainer.className = "hero";
+        function aplicarTematicaCompleta(tipo) {
+            // Limpiar clases previas del body
+            cuerpoPagina.className = "";
             tematicaBannerExtra.innerHTML = "";
 
             if (tipo === "navidad") {
-                heroThemeContainer.style.background = "linear-gradient(135deg, #4a0000 0%, #1a0000 100%)";
-                heroThemeContainer.style.borderBottom = "1px solid #d4af37";
+                cuerpoPagina.classList.add("theme-navidad");
                 tematicaBannerExtra.innerHTML = `
-                    <div style="text-align: center; padding: 15px 16px 5px 16px;">
-                        <span style="color: #ffd700; font-family: 'Cinzel', serif; font-size: 1.3rem;">❄️ ¡Esta Navidad, regala elegancia! ❄️</span>
-                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 5px 0; font-size: 1.8rem;">Colección Navidad</h2>
+                    <div style="text-align: center; padding: 18px 16px 8px 16px;">
+                        <span style="color: #ffd700; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px;">❄️ ¡Esta Navidad, regala elegancia! ❄️</span>
+                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 6px 0; font-size: 1.9rem; text-transform: uppercase;">Colección Navidad</h2>
                     </div>
                 `;
             } else if (tipo === "independencia") {
-                heroThemeContainer.style.background = "linear-gradient(135deg, #002b49 0%, #0a0a0a 100%)";
-                heroThemeContainer.style.borderBottom = "1px solid #ef4444";
+                cuerpoPagina.classList.add("theme-independencia");
                 tematicaBannerExtra.innerHTML = `
-                    <div style="text-align: center; padding: 15px 16px 5px 16px;">
-                        <span style="color: #60a5fa; font-family: 'Cinzel', serif; font-size: 1.3rem;">🇨🇷 ¡Viva Costa Rica! 🇨🇷</span>
-                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 5px 0; font-size: 1.8rem;">15 de Setiembre - Día de la Independencia</h2>
+                    <div style="text-align: center; padding: 18px 16px 8px 16px;">
+                        <span style="color: #60a5fa; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px;">🇨🇷 ¡Viva Costa Rica! Pura Vida, Costa Rica! 🇨🇷</span>
+                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 6px 0; font-size: 1.9rem; text-transform: uppercase;">15 de Setiembre - Día de la Independencia</h2>
                     </div>
                 `;
             } else if (tipo === "san-valentin") {
-                heroThemeContainer.style.background = "linear-gradient(135deg, #831843 0%, #1a050f 100%)";
-                heroThemeContainer.style.borderBottom = "1px solid #f4b6c2";
+                cuerpoPagina.classList.add("theme-san-valentin");
                 tematicaBannerExtra.innerHTML = `
-                    <div style="text-align: center; padding: 15px 16px 5px 16px;">
-                        <span style="color: #f4b6c2; font-family: 'Cinzel', serif; font-size: 1.2rem;">💕 Porque el amor también se lleva puesto 💕</span>
-                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 5px 0; font-size: 1.8rem;">Colección San Valentín</h2>
+                    <div style="text-align: center; padding: 18px 16px 8px 16px;">
+                        <span style="color: #f4b6c2; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px;">💕 Porque el amor también se lleva puesto 💕</span>
+                        <h2 style="font-family: 'Cinzel', serif; color: #fff; margin: 6px 0; font-size: 1.9rem; text-transform: uppercase;">Colección San Valentín</h2>
                     </div>
                 `;
             } else {
-                heroThemeContainer.style.background = "#000000";
-                heroThemeContainer.style.borderBottom = "1px solid var(--pink-accent)";
+                // Tema normal por defecto
+                cuerpoPagina.className = "";
             }
         }
 
