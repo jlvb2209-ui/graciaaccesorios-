@@ -39,14 +39,14 @@
         }
 
         /* =========================================================
-           1. TEMA NAVIDAD (Encabezado negro, nuevo tono rosado de fondo y copitos)
+           1. TEMA NAVIDAD (Fondo con copitos, precios, nombres y modal en tono rosado)
            ========================================================= */
         body.theme-navidad {
-            background-color: #fde8ed !important;
+            background-color: #fdf2f4 !important;
             color: #500b1d !important;
-            background-image: url('image_5e8783.png'), url('istockphoto-171579764-612x612.jpg');
-            background-repeat: repeat, repeat;
-            background-size: auto, 85px;
+            background-image: url('istockphoto-171579764-612x612.jpg');
+            background-repeat: repeat;
+            background-size: 85px;
         }
         body.theme-navidad .hero {
             background: #000000 !important;
@@ -70,20 +70,28 @@
         }
         body.theme-navidad .product-card {
             background: #ffffff !important;
-            border: 2px solid #ffe4e6 !important;
+            border: 2px solid #fbcfe8 !important;
             box-shadow: 0 6px 18px rgba(225, 29, 72, 0.08) !important;
         }
         body.theme-navidad .product-category-tag {
-            color: #e11d48 !important;
+            color: #db2777 !important;
             font-weight: 700 !important;
         }
+        /* Nombre de los productos con tono rosado acorde */
         body.theme-navidad .product-title {
-            color: #881337 !important;
+            color: #9f1239 !important;
+            font-weight: 700 !important;
         }
+        /* Caja de precios con fondo en tono rosado */
         body.theme-navidad .product-price-box {
-            background: #e11d48 !important;
-            color: #ffffff !important;
-            border: 1px solid #be123c !important;
+            background: #fce7f3 !important;
+            color: #be123c !important;
+            border: 1px solid #f43f5e !important;
+            font-weight: 700 !important;
+        }
+        /* Fondo al presionar/ampliar la imagen (Modal) con el tono rosado */
+        body.theme-navidad .modal {
+            background-color: rgba(253, 242, 244, 0.95) !important;
         }
         body.theme-navidad footer {
             background: #000000 !important;
@@ -299,11 +307,11 @@
 
             if (tipo === "navidad") {
                 cuerpoPagina.classList.add("theme-navidad");
-                brandLogoImg.src = "IMG_7080.PNG"; // Logo con gorro y fondo negro[cite: 4]
+                brandLogoImg.src = "IMG_7080.PNG";
                 faviconLogo.href = "IMG_7080.PNG";
 
                 tematicaBannerExtra.innerHTML = ``;
-                decoracionesDistribuidas.innerHTML = ``; 
+                decoracionesDistribuidas.innerHTML = ``;
 
             } else if (tipo === "independencia") {
                 cuerpoPagina.classList.add("theme-independencia");
@@ -324,11 +332,11 @@
 
             } else if (tipo === "san-valentin") {
                 cuerpoPagina.classList.add("theme-san-valentin");
-                brandLogoImg.src = "rosa-negro.jpg"; // Logo rosado con fondo negro[cite: 5]
+                brandLogoImg.src = "rosa-negro.jpg";
                 faviconLogo.href = "rosa-negro.jpg";
 
                 tematicaBannerExtra.innerHTML = ``;
-                decoracionesDistribuidas.innerHTML = ``; 
+                decoracionesDistribuidas.innerHTML = ``;
 
             } else {
                 // Tema normal original por defecto (Negro y Dorado con LOGO.PNG)
