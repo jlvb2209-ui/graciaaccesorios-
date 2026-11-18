@@ -39,14 +39,14 @@
         }
 
         /* =========================================================
-           1. TEMA NAVIDAD (Encabezado negro, copos de nieve de fondo)
+           1. TEMA NAVIDAD (Encabezado negro, nuevo tono rosado de fondo y copitos)
            ========================================================= */
         body.theme-navidad {
-            background-color: #fff0f3 !important;
+            background-color: #fde8ed !important;
             color: #500b1d !important;
-            background-image: url('image_5e29ee.png');[cite: 8]
-            background-repeat: repeat;
-            background-size: 160px;
+            background-image: url('image_5e8783.png'), url('istockphoto-171579764-612x612.jpg');
+            background-repeat: repeat, repeat;
+            background-size: auto, 85px;
         }
         body.theme-navidad .hero {
             background: #000000 !important;
@@ -153,7 +153,7 @@
         body.theme-san-valentin {
             background-color: #fff5f7 !important;
             color: #4c0519 !important;
-            background-image: url('IMG_7085.JPG.jpeg');[cite: 6]
+            background-image: url('IMG_7085.JPG.jpeg');
             background-repeat: repeat;
             background-size: 160px;
         }
@@ -303,7 +303,7 @@
                 faviconLogo.href = "IMG_7080.PNG";
 
                 tematicaBannerExtra.innerHTML = ``;
-                decoracionesDistribuidas.innerHTML = ``; // Sin adornos laterales de árbol ni regalos
+                decoracionesDistribuidas.innerHTML = ``; 
 
             } else if (tipo === "independencia") {
                 cuerpoPagina.classList.add("theme-independencia");
@@ -312,13 +312,13 @@
 
                 tematicaBannerExtra.innerHTML = `
                     <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #1e3a8a;">
-                        <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">[cite: 7]
+                        <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">
                     </div>
                 `;
 
                 decoracionesDistribuidas.innerHTML = `
                     <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 100px;">
-                    <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">[cite: 7]
+                    <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">
                     <img src="baila.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 95px;">
                 `;
 
@@ -328,7 +328,7 @@
                 faviconLogo.href = "rosa-negro.jpg";
 
                 tematicaBannerExtra.innerHTML = ``;
-                decoracionesDistribuidas.innerHTML = ``; // Sin corazones laterales flotantes
+                decoracionesDistribuidas.innerHTML = ``; 
 
             } else {
                 // Tema normal original por defecto (Negro y Dorado con LOGO.PNG)
