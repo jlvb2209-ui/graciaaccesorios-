@@ -17,7 +17,6 @@
             overflow-x: hidden;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
-
         .decoracion-lateral {
             position: fixed;
             pointer-events: none;
@@ -26,18 +25,15 @@
             transition: all 0.4s ease;
             mix-blend-mode: multiply;
         }
-
         .hero {
             position: relative;
             z-index: 2;
             transition: all 0.4s ease;
         }
-
         .catalog-layout, footer {
             position: relative;
             z-index: 2;
         }
-
         /* =========================================================
            1. TEMA NAVIDAD (Fondo con copitos, precios, nombres y modal en tono rosado)
            ========================================================= */
@@ -98,7 +94,6 @@
             color: #ffffff !important;
             border-top: 3px solid #e11d48 !important;
         }
-
         /* =========================================================
            2. TEMA INDEPENDENCIA (Azul, Blanco y Rojo - SIN NEGRO)
            ========================================================= */
@@ -154,7 +149,6 @@
             color: #ffffff !important;
             border-top: 3px solid #dc2626 !important;
         }
-
         /* =========================================================
            3. TEMA SAN VALENTÍN (Encabezado negro, fondo de cuadros con corazones)
            ========================================================= */
@@ -206,7 +200,6 @@
             color: #ffffff !important;
             border-top: 3px solid #e11d48 !important;
         }
-
         @media (max-width: 768px) {
             .decoracion-lateral {
                 width: 60px !important;
@@ -216,9 +209,7 @@
     </style>
 </head>
 <body id="cuerpoPagina">
-
     <div id="decoracionesDistribuidas"></div>
-
     <header class="hero" id="heroThemeContainer">
         <div class="w hero-content">
             <!-- Logo dinámico según la temática -->
@@ -231,7 +222,6 @@
         </div>
         <div id="tematicaBannerExtra"></div>
     </header>
-
     <main class="w catalog-layout">
         <aside>
             <nav class="categories-container" id="categoryFilter">
@@ -242,19 +232,16 @@
             <!-- Se carga dinámicamente desde Firebase -->
         </section>
     </main>
-
     <!-- Modal para ampliar imagen -->
     <div id="imageModal" class="modal">
         <span class="modal-close" id="modalClose">×</span>
         <img class="modal-content" id="imgModalExpanded">
     </div>
-
     <footer>
         <div class="w">
             <p>© 2026 Joyería Exclusiva. Todos los derechos reservados.</p>
         </div>
     </footer>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import {
@@ -265,7 +252,6 @@
             orderBy,
             doc
         } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
         const firebaseConfig = {
             apiKey: "AIzaSyA5BXWwtk7LsDCXmjYhz5LOIv5tz6U1N_A",
             authDomain: "gracia-accesorios.firebaseapp.com",
@@ -274,7 +260,6 @@
             messagingSenderId: "843057510032",
             appId: "1:843057510032:web:148405f256ffd62b5a8a15"
         };
-
         const app = initializeApp(firebaseConfig);
         const db = initializeFirestore(app, { experimentalForceLongPolling: true });
         const grid = document.getElementById("productGrid");
@@ -284,14 +269,39 @@
         const decoracionesDistribuidas = document.getElementById("decoracionesDistribuidas");
         const brandLogoImg = document.getElementById("brandLogoImg");
         const faviconLogo = document.getElementById("faviconLogo");
-
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("imgModalExpanded");
         const modalClose = document.getElementById("modalClose");
 
+        function volverAlInicio() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        history.replaceState({ inicio: true }, "", window.location.href);
+        history.pushState({ catalogo: true }, "", window.location.href);
+
+        window.addEventListener("popstate", () => {
+            if (modal.style.display === "flex") {
+                modal.style.display = "none";
+                history.pushState({ catalogo: true }, "", window.location.href);
+                return;
+            }
+            if (window.scrollY > 80 || categoriaActual !== "todos" || limiteVisible > 24) {
+                if (categoriaActual !== "todos" || limiteVisible > 24) {
+                    categoriaActual = "todos";
+                    limiteVisible = 24;
+                    actualizarBotonesCategorias();
+                    renderizarProductos("todos");
+                }
+                volverAlInicio();
+                history.pushState({ catalogo: true }, "", window.location.href);
+            } else {
+                history.back();
+            }
+        });
+
         modalClose.addEventListener("click", () => { modal.style.display = "none"; });
         modal.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
-
         onSnapshot(doc(db, "configuracion", "tematica"), (docSnap) => {
             if (docSnap.exists()) {
                 aplicarTematica(docSnap.data().tematica || "normal");
@@ -299,57 +309,46 @@
                 aplicarTematica("normal");
             }
         });
-
         function aplicarTematica(tipo) {
             cuerpoPagina.className = "";
             tematicaBannerExtra.innerHTML = "";
             decoracionesDistribuidas.innerHTML = "";
-
             if (tipo === "navidad") {
                 cuerpoPagina.classList.add("theme-navidad");
                 brandLogoImg.src = "IMG_7080.PNG";
                 faviconLogo.href = "IMG_7080.PNG";
-
                 tematicaBannerExtra.innerHTML = ``;
                 decoracionesDistribuidas.innerHTML = ``;
-
             } else if (tipo === "independencia") {
                 cuerpoPagina.classList.add("theme-independencia");
                 brandLogoImg.src = "logo-azul.jpg"; 
                 faviconLogo.href = "logo-azul.jpg";
-
                 tematicaBannerExtra.innerHTML = `
                     <div style="background: #ffffff; text-align: center; padding: 10px; border-top: 3px solid #1e3a8a;">
                         <img src="IMG_7082.JPG.jpeg" alt="Bandera Costa Rica" style="max-height: 130px; width: auto; max-width: 100%; border-radius: 8px;">
                     </div>
                 `;
-
                 decoracionesDistribuidas.innerHTML = `
                     <img src="baila.jpg" class="decoracion-lateral" style="bottom: 20px; left: 15px; width: 100px;">
                     <img src="IMG_7082.JPG.jpeg" class="decoracion-lateral" style="top: 340px; right: 15px; width: 120px;">
                     <img src="baila.jpg" class="decoracion-lateral" style="top: 340px; left: 15px; width: 95px;">
                 `;
-
             } else if (tipo === "san-valentin") {
                 cuerpoPagina.classList.add("theme-san-valentin");
                 brandLogoImg.src = "rosa-negro.jpg";
                 faviconLogo.href = "rosa-negro.jpg";
-
                 tematicaBannerExtra.innerHTML = ``;
                 decoracionesDistribuidas.innerHTML = ``;
-
             } else {
                 // Tema normal original por defecto (Negro y Dorado con LOGO.PNG)
                 brandLogoImg.src = "LOGO.PNG";
                 faviconLogo.href = "LOGO.PNG";
             }
         }
-
         let productosCache = [];
         let categoriasCache = [];
         let categoriaActual = "todos";
         let limiteVisible = 24; 
-
         const qProducts = query(collection(db, "jewelry"), orderBy("creado", "desc"));
         onSnapshot(qProducts, (snapshot) => {
             productosCache = [];
@@ -361,7 +360,6 @@
             });
             renderizarProductos(categoriaActual);
         });
-
         onSnapshot(collection(db, "categories"), (snapshot) => {
             categoriasCache = [];
             snapshot.forEach((doc) => {
@@ -372,7 +370,6 @@
             });
             actualizarBotonesCategorias();
         });
-
         function actualizarBotonesCategorias() {
             if (!categoryContainer) return;
             let html = `<button class="cat-btn ${categoriaActual === 'todos' ? 'active' : ''}" data-category="todos">✨ Ver Todo</button>`;
@@ -391,7 +388,6 @@
                 });
             });
         }
-
         function renderizarProductos(categoriaFiltro) {
             if (!grid) return;
             const filtrados = productosCache.filter(p => 
@@ -419,15 +415,20 @@
                 </div>
             `).join("");
 
+            contenidoHtml += `<div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; padding: 20px 0;">`;
             if (limiteVisible < filtrados.length) {
                 contenidoHtml += `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 20px 0;">
-                        <button id="btnCargarMas" style="background: var(--gold); color: #000; border: none; padding: 12px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">
-                            Cargar más productos (${filtrados.length - limiteVisible} restantes)
-                        </button>
-                    </div>
+                    <button id="btnCargarMas" style="background: var(--gold); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">
+                        Cargar más productos (${filtrados.length - limiteVisible} restantes)
+                    </button>
                 `;
             }
+            contenidoHtml += `
+                <button id="btnVolverInicio" style="background: transparent; color: var(--pink-accent); border: 1px solid var(--pink-accent); padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">
+                    ⬆️ Volver al inicio
+                </button>
+            </div>`;
+
             grid.innerHTML = contenidoHtml;
             const btnMas = document.getElementById("btnCargarMas");
             if (btnMas) {
@@ -435,6 +436,10 @@
                     limiteVisible += 24; 
                     renderizarProductos(categoriaActual);
                 });
+            }
+            const btnInicio = document.getElementById("btnVolverInicio");
+            if (btnInicio) {
+                btnInicio.addEventListener("click", volverAlInicio);
             }
             grid.querySelectorAll(".zoomable-img").forEach(img => {
                 img.addEventListener("click", () => {
