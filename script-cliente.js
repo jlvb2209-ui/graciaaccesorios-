@@ -6,7 +6,6 @@ import {
     query,
     orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 const firebaseConfig = {
     apiKey: "AIzaSyA5BXWwtk7LsDCXmjYhz5LOIv5tz6U1N_A",
     authDomain: "gracia-accesorios.firebaseapp.com",
@@ -15,33 +14,26 @@ const firebaseConfig = {
     messagingSenderId: "843057510032",
     appId: "1:843057510032:web:148405f256ffd62b5a8a15"
 };
-
 const app = initializeApp(firebaseConfig);
 const db = initializeFirestore(app, { experimentalForceLongPolling: true });
-
 const grid = document.getElementById("productGrid");
 const categoryContainer = document.getElementById("categoryFilter");
-
 // Elementos del Modal de Imagen
 const modal = document.getElementById("imageModal");
 const modalImg = document.getElementById("imgModalExpanded");
 const modalClose = document.getElementById("modalClose");
-
 modalClose.addEventListener("click", () => {
     modal.style.display = "none";
 });
-
 modal.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.style.display = "none";
     }
 });
-
 let productosCache = [];
 let categoriasCache = [];
 let categoriaActual = "todos";
 let limiteVisible = 24; 
-
 // Cargar productos desde Firebase ordenados
 const qProducts = query(collection(db, "jewelry"), orderBy("creado", "desc"));
 onSnapshot(qProducts, (snapshot) => {
@@ -57,7 +49,6 @@ onSnapshot(qProducts, (snapshot) => {
 }, (error) => {
     console.error("Error al leer productos:", error);
 });
-
 onSnapshot(collection(db, "categories"), (snapshot) => {
     categoriasCache = [];
     snapshot.forEach((doc) => {
@@ -70,7 +61,6 @@ onSnapshot(collection(db, "categories"), (snapshot) => {
 }, (error) => {
     console.error("Error al leer categorías:", error);
 });
-
 function actualizarBotonesCategorias() {
     if (!categoryContainer) return;
     
@@ -93,7 +83,6 @@ function actualizarBotonesCategorias() {
         });
     });
 }
-
 function renderizarProductos(categoriaFiltro) {
     if (!grid) return;
     
@@ -105,7 +94,6 @@ function renderizarProductos(categoriaFiltro) {
         grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px 0;">No hay productos disponibles en esta categoría.</p>`;
         return;
     }
-
     const productosAMostrar = filtrados.slice(0, limiteVisible);
     
     let contenidoHtml = productosAMostrar.map(p => `
@@ -124,7 +112,6 @@ function renderizarProductos(categoriaFiltro) {
             </div>
         </div>
     `).join("");
-
     if (limiteVisible < filtrados.length) {
         contenidoHtml += `
             <div style="grid-column: 1 / -1; text-align: center; padding: 20px 0;">
@@ -136,7 +123,6 @@ function renderizarProductos(categoriaFiltro) {
     }
     
     grid.innerHTML = contenidoHtml;
-
     const btnMas = document.getElementById("btnCargarMas");
     if (btnMas) {
         btnMas.addEventListener("click", () => {
@@ -144,7 +130,6 @@ function renderizarProductos(categoriaFiltro) {
             renderizarProductos(categoriaActual);
         });
     }
-
     grid.querySelectorAll(".zoomable-img").forEach(img => {
         img.addEventListener("click", () => {
             modal.style.display = "flex";
