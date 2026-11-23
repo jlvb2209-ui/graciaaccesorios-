@@ -220,7 +220,6 @@ footer {
     font-size: 0.85rem;
     margin-top: 40px;
 }
-
 /* Adaptación del botón Volver al inicio en temas claros */
 body.theme-navidad #btnVolverInicio,
 body.theme-san-valentin #btnVolverInicio {
@@ -228,7 +227,6 @@ body.theme-san-valentin #btnVolverInicio {
     border-color: #e11d48 !important;
     background: #ffffff !important;
 }
-
 body.theme-independencia #btnVolverInicio {
     color: #1e3a8a !important;
     border-color: #1e3a8a !important;
