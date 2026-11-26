@@ -34,6 +34,35 @@
             position: relative;
             z-index: 2;
         }
+        /* --- ETIQUETA NUEVO SOBRE IMAGEN (15 DÍAS) --- */
+        .product-img-container {
+            position: relative;
+        }
+        .badge-nuevo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--pink-accent);
+            color: #000000;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 999px;
+            z-index: 3;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+        }
+        body.theme-navidad .badge-nuevo,
+        body.theme-san-valentin .badge-nuevo {
+            background: #e11d48;
+            color: #ffffff;
+        }
+        body.theme-independencia .badge-nuevo {
+            background: #dc2626;
+            color: #ffffff;
+        }
         /* --- ENLACES DE REDES SOCIALES Y WHATSAPP --- */
         .social-links {
             display: flex;
@@ -490,10 +519,10 @@
 
             if (!fechaCreacionMs) return false;
 
-            const cuatroDiasMs = 4 * 24 * 60 * 60 * 1000;
+            const quinceDiasMs = 15 * 24 * 60 * 60 * 1000;
             const diferencia = Date.now() - fechaCreacionMs;
 
-            return diferencia >= 0 && diferencia < cuatroDiasMs;
+            return diferencia >= 0 && diferencia < quinceDiasMs;
         }
         function renderizarProductos(categoriaFiltro) {
             if (!grid) return;
